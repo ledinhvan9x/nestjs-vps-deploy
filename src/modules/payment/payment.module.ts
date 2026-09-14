@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { PaymentService } from './payment.service';
 import { PaymentController } from './payment.controller';
 import { PaypalStrategy } from './strategies/paypal.strategy';
-
-import { CardStrategy } from './strategies/card.strategy';
-import { BankStrategy } from './strategies/bank.strategy';
 import { PayPalAdapter } from './adapters/paypal.adapter';
+import { PayPalSDK } from './external/paypal.sdk';
+import { StripeAdapter } from './adapters/stripe.adapter';
+import { StripeSDK } from './external/stripe.sdk';
+import { StripeStrategy } from './strategies/stripe.strategy';
 
 @Module({
   controllers: [PaymentController],
@@ -13,17 +14,17 @@ import { PayPalAdapter } from './adapters/paypal.adapter';
     PaymentService,
     PaypalStrategy,
     PayPalAdapter,
-    PayPalAdapter,
-    CardStrategy,
-    BankStrategy,
+    PayPalSDK,
+    StripeStrategy,
+    StripeAdapter,
+    StripeSDK,
     {
       provide: 'PAYMENT_STRATEGIES',
-      inject: [CardStrategy, PaypalStrategy, BankStrategy],
-      useFactory: (
-        card: CardStrategy,
-        paypal: PaypalStrategy,
-        bank: BankStrategy,
-      ) => [card, paypal, bank],
+      inject: [StripeStrategy, PaypalStrategy],
+      useFactory: (stripe: StripeStrategy, paypal: PaypalStrategy) => [
+        stripe,
+        paypal,
+      ],
     },
   ],
 })
