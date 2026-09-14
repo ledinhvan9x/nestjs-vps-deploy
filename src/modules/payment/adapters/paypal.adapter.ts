@@ -1,3 +1,6 @@
+import { PayPalSDK } from '../external/paypal.sdk';
+import { PaymentProvider } from '../payment-provider.interface';
+
 export class PayPalAdapter implements PaymentProvider {
   constructor(private readonly paypal: PayPalSDK) {}
 

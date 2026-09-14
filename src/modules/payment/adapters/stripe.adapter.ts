@@ -1,3 +1,6 @@
+import { StripeSDK } from '../external/stripe.sdk';
+import { PaymentProvider } from '../payment-provider.interface';
+
 export class StripeAdapter implements PaymentProvider {
   constructor(private readonly stripe: StripeSDK) {}
 
@@ -5,4 +8,3 @@ export class StripeAdapter implements PaymentProvider {
     return this.stripe.makePayment(amount);
   }
 }
-
