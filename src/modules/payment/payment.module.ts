@@ -5,12 +5,15 @@ import { PaypalStrategy } from './strategies/paypal.strategy';
 
 import { CardStrategy } from './strategies/card.strategy';
 import { BankStrategy } from './strategies/bank.strategy';
+import { PayPalAdapter } from './adapters/paypal.adapter';
 
 @Module({
   controllers: [PaymentController],
   providers: [
     PaymentService,
     PaypalStrategy,
+    PayPalAdapter,
+    PayPalAdapter,
     CardStrategy,
     BankStrategy,
     {
