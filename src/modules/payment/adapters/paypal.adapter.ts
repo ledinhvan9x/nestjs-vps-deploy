@@ -4,3 +4,4 @@ export class PayPalAdapter implements PaymentProvider {
   pay(amount: number) {
     return this.paypal.createOrder({ total: amount });
   }
+}

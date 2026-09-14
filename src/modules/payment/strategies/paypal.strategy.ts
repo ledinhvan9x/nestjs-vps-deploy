@@ -5,7 +5,11 @@ import { PaymentStrategy } from './payment.strategy';
 export class PaypalStrategy implements PaymentStrategy {
   type = 'paypal';
 
+   constructor(
+    private readonly paypalAdapter: PaypalAdapter,
+  ) {}
+
   async pay(amount: number) {
-    console.log(`Pay ${amount} with PayPal`);
+    return this.paypalAdapter.pay(amount);
   }
 }
